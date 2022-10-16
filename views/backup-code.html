@@ -1,0 +1,73 @@
+<%
+                if(usersData.length != 0){
+                    let i = 1
+                    for(let user of usersData) {
+                %>
+                <tr>
+                    <td><%= i++ %></td>
+                    <td><%= user.nama %></td>
+                    <td><%= user.jurusan %></td>
+                    <td><%= user.jenis_kelamin %></td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        <!-- data-bs-toggle="modal" 
+                        data-bs-target="#exampleModal" -->
+                        <a class="btn btn-primary edit" 
+                            data-id="<%= user.id %>" 
+                            data-user_nama="<%= user.nama %>"
+                            data-user_jurusan="<%= user.jurusan %>"
+                            data-user_kelamin="<%= user.jenis_kelamin %>"
+                        >
+                            Edit
+                        </a>
+                        |
+                        <a class="btn btn-danger" href="/hapus/<%= user.id %>" role="button">Hapus</a>
+                    </td>
+                </tr>
+                    <% } %>
+                <% } else{ %>
+                <tr>
+                    <td class="text-md-center" colspan="5">Data Kosong</td>
+                </tr>
+                <% } %>
+
+
+
+                <form action="/update/" method="post">
+                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row mb-3 form-group">
+                                    <label for="fullName" class="col-sm-2 col-form-label">Nama</label>
+                                    <div class="col-sm-10">
+                                    <input type="text" name="user_nama" class="form-control user_nama">
+                                    </div>
+                                </div>
+                                <div class="row mb-3 form-group">
+                                    <label for="jurusan" class="col-sm-2 col-form-label">Jurusan</label>
+                                    <div class="col-sm-10">
+                                    <input type="text" name="user_jurusan" class="form-control jurusan" >
+                                    </div>
+                                </div>
+                                <div class="row mb-3 form-group">
+                                    <label for="kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="user_kelamin" class="form-control kelamin" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" name="id" class="product_id">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary">Simpan perubahan</button>
+                                <!-- <a class="btn btn-primary" href="/update" role="button">Simpan perubahan</a> -->
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </form>
